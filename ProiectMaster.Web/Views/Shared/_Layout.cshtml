@@ -1,0 +1,109 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+@{ 
+    var shoppingList = HttpContextAccessor.HttpContext.Session.Get<List<int>>(SessionHelper.ShoppingCart);
+    var shoppingCount = shoppingList == null ? 0 : shoppingList.Count;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProiectMaster.Web</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/fontawesome/js/all.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <script src="~/js/productType.js"></script>
+    <script src="~/js/product.js"></script>
+
+</head>
+<body style="background:#fafafa">
+    <header>
+        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.jpg" style="max-height:80px;" alt="Logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Acasa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ProductType" asp-action="Index">Categorii produse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Produse</a>
+                        </li>
+                        
+                    </ul>
+                    <a class="nav-link text-dark"><span class="fas fa-shopping-cart"></span> Cosul meu (@shoppingCount)</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container" style="background:#fff;margin-top: 130px;margin-bottom: 30px;border: 1px solid #dee2e6;">
+
+        <main role="main" class="pb-3 pt-3">
+            @RenderBody()
+        </main>
+
+        @await RenderSectionAsync("Scripts", required: false)
+
+    </div>
+
+    <footer style="background: #252525; padding-top: 30px;padding-bottom: 30px;color: #eee;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 segment-three">
+                    <h2>Contacteaza-ne</h2>
+                    <ul>
+                        <li>
+                            <a href="https://goo.gl/maps/3NRXLC24jCVzn9zS7" target="_blank">
+                                Sos. Alexandriei Nr.5
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:0727432266">0727432266</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 segment-four">
+                    <h2>Urmareste-ne</h2>
+
+                    <a href="https://www.instagram.com/davidoffcafe/" target="_blank">
+                        <img src="https://www.fordbrasov.ro/uploads/img/social/instagram.png">
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+    <div class="container pr-5 pl-5 pt-4 pb-4" style="background:#fff">
+        &copy;<span id="current_year"></span> - Proiect Afaceri Electronice - Alina Toma
+    </div>
+
+    <script type="text/javascript">
+        var dteNow = new Date();
+        $("#current_year").html(dteNow.getFullYear());
+    </script>
+</body>
+</html>
